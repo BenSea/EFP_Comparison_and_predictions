@@ -1,0 +1,38 @@
+# This is a project that will ultimatly allow you to compare two countries by land area and population in 
+# 2018, and see how their ecological ratings change over time. These two factors can describe very different countries
+# historically, but in todays society they are considered on a similair level in many ways(especially by population). Using this 
+# data we can compare how the same size countries use their land and resources, or the same population countries use
+# their resources. The aim is to be able to compare countries on these two different basis's and establish a ranking
+# system based on area, population, and a combination of the two
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+Countries = pd.read_csv('/Users/Benjamin/Documents/nfa_2018_edition.csv'  )
+
+EFC_PerCap = Countries.query('record == "EFConsPerCap"')
+EFP_PerCap = Countries.query('record == "EFProdPerCap"')
+
+U_S_cons = EFC_PerCap.query('country_code == 231')
+China_cons = EFC_PerCap.query('country_code == 351')
+Canada_cons = EFC_PerCap.query('country_code == 33')
+Brazil_cons = EFC_PerCap.query('country_code == 21')
+Indonesia_cons = EFC_PerCap.query('country_code == 101')
+
+
+ax = U_S_cons.plot(x='year', y ='total', label = "US", title = "Effective Carbon Footprint of Consumption per Capita")
+bx = China_cons.plot(x='year', y='total', label = "China", ax=ax)
+cx = Canada_cons.plot(x='year', y = 'total', label = "Canada", ax=ax)
+dx = Brazil_cons.plot(x='year', y = 'total', label = "Brazil",ax=ax,) 
+ex = Indonesia_cons.plot(x='year',y = 'total', label= "Indonesia", ax=ax)
+
+
+
+ax = U_S_cons.plot(x='year', y ='fishing_ground', label = "US", title = "Effective Carbon Footprint of Consumption for Fishing Grounds per Capita")
+bx = China_cons.plot(x='year', y='fishing_ground', label = "China", ax=ax)
+cx = Canada_cons.plot(x='year', y = 'fishing_ground', label = "Canada", ax=ax)
+dx = Brazil_cons.plot(x='year', y = 'fishing_ground', label = "Brazil",ax=ax,) 
+ex = Indonesia_cons.plot(x='year',y = 'fishing_ground', label= "Indonesia", ax=ax)
+
+
+
